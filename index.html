@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html> -->
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -19,7 +19,7 @@
   <!-- Font Awesome Icon - CSS-->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
   <!-- Custom Styles-->
-  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=6" />
   <title>Shuo Yin Portfolio</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -72,6 +72,11 @@
 </head>
 
 <body>
+  <script>
+    if (localStorage.getItem("dark-mode") === "on") {
+      document.body.classList.add("dark-mode");
+    }
+  </script>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PGZH8HT"
   height="0" width="0" style="display:none;visibility:hidden"></iframe>
@@ -156,7 +161,7 @@
         class="waves-effect waves-dark teal-text"><i class="mdi-file-folder-open small"></i><span>Resume</span></a>  
       </li>
       <li class="bold">
-        <a href="#!" class="dark-toggle waves-effect waves-dark teal-text"><i
+        <a href="#" class="dark-toggle waves-effect waves-dark teal-text"><i
             class="mdi-action-invert-colors small"></i><span>Dark Mode</span></a>
       </li>
     </ul>
@@ -211,7 +216,7 @@
           class="waves-effect waves-dark teal-text"><i class="mdi-file-folder-open small"></i><span>Resume</span></a>
       </li>
       <li class="bold">
-        <a href="#!" class="dark-toggle waves-effect waves-dark teal-text"><i
+        <a href="#" class="dark-toggle waves-effect waves-dark teal-text"><i
             class="mdi-action-invert-colors small"></i><span>Dark Mode</span></a>
       </li>
     </ul>
@@ -771,14 +776,24 @@
     document.getElementById("load-more").onclick = function () {
       displayProjects(projects.length - shown);
     };
+  </script>
 
+  <script>
     var darkButtons = document.getElementsByClassName("dark-toggle");
     var d;
     for (d = 0; d < darkButtons.length; d++) {
-      darkButtons[d].onclick = function () {
+      darkButtons[d].onclick = function (e) {
+        if (e && e.preventDefault) {
+          e.preventDefault();
+        }
         document.body.classList.toggle("dark-mode");
+        if (document.body.classList.contains("dark-mode")) {
+          localStorage.setItem("dark-mode", "on");
+        } else {
+          localStorage.removeItem("dark-mode");
+        }
       };
-    };
+    }
   </script>
 </body>
 
